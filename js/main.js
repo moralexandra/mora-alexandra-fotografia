@@ -1,11 +1,10 @@
 /* =====================================================================
-   Móra Alexandra Fotográfia — interakciók
+   Szandi's Little Miracles (Móra Alexandra) — interakciók
    ===================================================================== */
 
 /* === ÁRAJÁNLAT cél e-mail ============================================
-   Alexandra külön e-mailt hoz létre az árajánlat kéréseknek.
-   Amint megvan, írd át EZT az egy sort a végleges címre:        */
-const QUOTE_EMAIL = "moraalexandra89@gmail.com";   // TODO: cseréld a dedikált árajánlat e-mailre
+   Az árajánlatkérő űrlap erre a címre nyitja meg a kész levelet.    */
+const QUOTE_EMAIL = "szandi.littlemiracles@gmail.com";
 /* ==================================================================== */
 
 /* JS aktív → engedélyezzük a reveal-animációkat (JS nélkül a tartalom alapból látszik) */
@@ -97,7 +96,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const subject = `Árajánlatkérés — ${tipus || "fotózás"}${nev ? " · " + nev : ""}`;
       const body =
-`Szia Alexandra!
+`Szia Szandi!
 
 Szeretnék árajánlatot kérni az alábbiakhoz:
 
