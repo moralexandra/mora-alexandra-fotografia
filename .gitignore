@@ -1,0 +1,10 @@
+# munkafájlok / nyersanyag — NEM kerül fel
+_drive_photos/
+_contactsheets/
+images/design-otletek/
+_*.py
+_*.txt
+_*.json
+*.docx
+*.zip
+.claude/
