@@ -459,3 +459,33 @@ html.js .reveal.in{ opacity:1; transform:none; }
 
 /* a fő tartalom a textúra fölött */
 .site-header,.hero,main,.site-footer{ position:relative; z-index:2; }
+
+/* =====================================================================
+   VÉLEMÉNYEK / testimonials
+   ===================================================================== */
+.testimonials{ display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:clamp(18px,2.4vw,30px); }
+.tcard{
+  position:relative; background:var(--paper); border:1px solid var(--line-soft); border-radius:var(--radius);
+  padding:clamp(28px,3vw,40px) clamp(24px,2.6vw,34px) clamp(24px,2.6vw,32px);
+  box-shadow:var(--shadow-sm); display:flex; flex-direction:column; gap:15px; overflow:hidden;
+  transition:transform .45s var(--ease), box-shadow .45s var(--ease);
+}
+.tcard::before{
+  content:"\201C"; position:absolute; top:2px; right:22px; font-family:var(--serif);
+  font-size:5.4rem; line-height:1; color:var(--sand); pointer-events:none;
+}
+.tcard:hover{ transform:translateY(-4px); box-shadow:var(--shadow-md); }
+.tcard .stars{ color:var(--tan); letter-spacing:3px; font-size:.92rem; }
+.tcard blockquote{
+  margin:0; font-family:var(--serif); font-style:italic; font-size:clamp(1.12rem,1.5vw,1.34rem);
+  line-height:1.5; color:var(--ink-soft); position:relative; z-index:1;
+}
+.tcard figcaption{ display:flex; align-items:center; gap:12px; margin-top:auto; padding-top:6px; }
+.tcard .t-ava{
+  width:40px; height:40px; flex:none; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  font-family:var(--serif); font-size:1.1rem; color:var(--blue-deep);
+  background:var(--blue-soft); border:1px solid var(--line-soft);
+}
+.tcard .t-meta{ display:flex; flex-direction:column; gap:2px; }
+.tcard .t-name{ font-family:var(--sans); font-weight:500; color:var(--ink); letter-spacing:.02em; font-size:.98rem; }
+.tcard .t-role{ font-size:.68rem; letter-spacing:.2em; text-transform:uppercase; color:var(--muted); }
