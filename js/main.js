@@ -3,8 +3,11 @@
    ===================================================================== */
 
 /* === ÁRAJÁNLAT cél e-mail ============================================
-   Az árajánlatkérő űrlap erre a címre nyitja meg a kész levelet.    */
+   Az árajánlatkérő űrlap a FormSubmit szolgáltatáson át KÖZVETLENÜL
+   erre a címre küldi az üzenetet (nem kell levelezőkliens a gépen).
+   Ha a küldés nem sikerül, tartalékként a régi mailto-t nyitja meg. */
 const QUOTE_EMAIL = "szandi.littlemiracles@gmail.com";
+const QUOTE_ENDPOINT = "https://formsubmit.co/ajax/" + QUOTE_EMAIL;
 /* ==================================================================== */
 
 /* JS aktív → engedélyezzük a reveal-animációkat (JS nélkül a tartalom alapból látszik) */
@@ -81,10 +84,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  /* ---- ÁRAJÁNLAT űrlap → e-mail ---- */
+  /* ---- ÁRAJÁNLAT űrlap → közvetlen e-mail küldés (FormSubmit) ---- */
   const form = document.querySelector("#quote-form");
   if (form) {
-    form.addEventListener("submit", (e) => {
+    form.addEventListener("submit", async (e) => {
       e.preventDefault();
       const d = new FormData(form);
       const nev   = (d.get("nev")   || "").toString().trim();
@@ -95,7 +98,34 @@ document.addEventListener("DOMContentLoaded", () => {
       const uzenet= (d.get("uzenet")|| "").toString().trim();
 
       const subject = `Árajánlatkérés — ${tipus || "fotózás"}${nev ? " · " + nev : ""}`;
-      const body =
+      const note = form.querySelector(".form-note");
+      const btn  = form.querySelector('button[type="submit"]');
+      const btnHtml = btn ? btn.innerHTML : "";
+      if (btn) { btn.disabled = true; btn.textContent = "Küldés…"; }
+
+      try {
+        const res = await fetch(QUOTE_ENDPOINT, {
+          method: "POST",
+          headers: { "Content-Type": "application/json", "Accept": "application/json" },
+          body: JSON.stringify({
+            "Név": nev,
+            "E-mail": email,
+            "Telefon": tel || "—",
+            "Fotózás típusa": tipus,
+            "Tervezett időpont": datum || "rugalmas",
+            "Üzenet": uzenet || "—",
+            _subject: subject,
+            _replyto: email,
+            _template: "table",
+            _captcha: "false",
+          }),
+        });
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        form.reset();
+        if (note) note.innerHTML = "Köszönöm, az üzeneted megérkezett! Hamarosan jelentkezem. ✦";
+      } catch (err) {
+        /* Tartalék: a régi mailto-s út, ha a küldő szolgáltatás nem elérhető */
+        const body =
 `Szia Szandi!
 
 Szeretnék árajánlatot kérni az alábbiakhoz:
@@ -111,12 +141,11 @@ ${uzenet}
 
 Köszönettel,
 ${nev}`;
-
-      const mailto = `mailto:${QUOTE_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-      window.location.href = mailto;
-
-      const note = form.querySelector(".form-note");
-      if (note) note.innerHTML = "Megnyílik a leveleződ a kész üzenettel — már csak el kell küldened. ✦";
+        window.location.href = `mailto:${QUOTE_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        if (note) note.innerHTML = `Ha nem nyílt meg a leveleződ, írj közvetlenül ide: <a href="mailto:${QUOTE_EMAIL}">${QUOTE_EMAIL}</a>`;
+      } finally {
+        if (btn) { btn.disabled = false; btn.innerHTML = btnHtml; }
+      }
     });
   }
 });
