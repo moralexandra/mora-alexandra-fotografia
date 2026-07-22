@@ -96,6 +96,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const tipus = (d.get("tipus") || "").toString().trim();
       const datum = (d.get("datum") || "").toString().trim();
       const uzenet= (d.get("uzenet")|| "").toString().trim();
+      const aszf  = d.get("aszf_elfogad") ? "Igen" : "Nem";
 
       const subject = `Árajánlatkérés — ${tipus || "fotózás"}${nev ? " · " + nev : ""}`;
       const note = form.querySelector(".form-note");
@@ -114,6 +115,7 @@ document.addEventListener("DOMContentLoaded", () => {
             "Fotózás típusa": tipus,
             "Tervezett időpont": datum || "rugalmas",
             "Üzenet": uzenet || "—",
+            "ÁSZF elfogadva": aszf,
             _subject: subject,
             _replyto: email,
             _template: "table",

@@ -368,6 +368,12 @@ h1,h2,h3,h4{ font-family:var(--serif); color:var(--ink); font-weight:500; line-h
 .form .btn{ width:100%; justify-content:center; margin-top:6px; }
 .form-note{ font-size:.78rem; color:var(--muted); margin-top:14px; text-align:center; }
 
+.field--check{ margin-bottom:22px; }
+.field--check label.check-label{ display:flex; align-items:flex-start; gap:10px; cursor:pointer; font-size:.86rem; color:var(--ink-soft); line-height:1.5; text-transform:none; letter-spacing:normal; }
+.check-label input[type="checkbox"]{ width:18px; height:18px; flex:none; margin-top:2px; accent-color:var(--blue-deep); cursor:pointer; }
+.check-label a{ color:var(--blue-deep); text-decoration:underline; text-underline-offset:2px; }
+.check-label a:hover{ color:var(--ink); }
+
 /* =====================================================================
    JOGI / ADATKEZELÉSI OLDAL
    ===================================================================== */
