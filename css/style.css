@@ -468,7 +468,8 @@ html.js .reveal.in{ opacity:1; transform:none; }
   .site-header{ background:rgba(250,246,239,.92); backdrop-filter:blur(12px); box-shadow:0 1px 0 var(--line-soft); padding:13px 0; }
   .nav-links{
     position:fixed; inset:0 0 0 auto; width:min(82vw,360px); background:var(--paper); box-shadow:var(--shadow-lg);
-    flex-direction:column; align-items:flex-start; justify-content:center; gap:26px; padding:60px var(--gutter);
+    flex-direction:column; align-items:flex-start; justify-content:flex-start; gap:22px;
+    padding:96px var(--gutter) 40px; overflow-y:auto; -webkit-overflow-scrolling:touch;
     transform:translateX(100%); transition:transform .5s var(--ease); z-index:60;
   }
   .nav-links.open{ transform:none; }
