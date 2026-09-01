@@ -63,10 +63,16 @@ Form" nevű levelet küld a fenti Gmail-címre — arra rá kell kattintani
 egyszer. Ezt jelezd Szandinak.
 
 PUBLIKÁLÁS (minden változtatás után)
-1. git add -A
-2. git commit -m "rövid magyar leírás a változtatásról"
-3. git push
-4. Várj kb. 1 percet, majd ELLENŐRIZD élőben: nyisd meg a
+1. Ha css/style.css VAGY js/main.js tartalma változott: minden HTML fájlban
+emeld meg a hivatkozásuk "?v=N" verziószámát eggyel (pl.
+css/style.css?v=2 -> ?v=3, ugyanígy js/main.js?v=2 -> ?v=3, MINDKETTŐT
+MINDEN oldalon: index/eskuvo/kismama/jegyes/csaladi/adatkezeles/aszf.html).
+Enélkül a látogatók böngészője a régi, cache-elt CSS/JS-t szolgálhatja ki
+az új HTML mellé, ami törött megjelenést okoz (pl. stílus nélküli elemek).
+2. git add -A
+3. git commit -m "rövid magyar leírás a változtatásról"
+4. git push
+5. Várj kb. 1 percet, majd ELLENŐRIZD élőben: nyisd meg a
 https://littlemiracleszandi.hu oldalt (és a konkrét aloldalt is), és nézd
 meg, tényleg látszik-e a változás. Ha képet cseréltél, frissíts Ctrl+F5-tel.
 Csak akkor mondd Szandinak, hogy "kész és élő", ha élőben leellenőrizted.
