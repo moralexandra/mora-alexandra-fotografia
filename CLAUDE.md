@@ -21,7 +21,10 @@ legfrissebb állapotot (git pull), végezd el amit Szandi kér, majd publikáld
 FÁJL-TÉRKÉP (mit hol találsz)
 Oldalak (mind a repo gyökerében):
 - index.html -> főoldal: hero, "Rólam", a két fő fotózási profil, AKCIÓ
-sáv, VÉLEMÉNYEK szekció, árajánlatkérő űrlap
+sáv, VÉLEMÉNYEK szekció, árajánlatkérő űrlap. Belépéskor egy felugró
+akció-popup is megjelenik (session-enként egyszer) — a #promo-modal elem,
+stílusa a style.css "AKCIÓ POPUP" blokkjában, logikája a main.js "AKCIÓ
+POPUP" blokkjában.
 - eskuvo.html -> esküvői galéria + árlista
 - kismama.html -> kismama (várandós) galéria + árlista
 - jegyes.html -> jegyes galéria + árlista

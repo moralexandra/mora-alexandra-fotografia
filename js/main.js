@@ -43,6 +43,27 @@ document.addEventListener("DOMContentLoaded", () => {
   /* ---- aktuális év a footerben ---- */
   document.querySelectorAll("[data-year]").forEach(el => el.textContent = new Date().getFullYear());
 
+  /* ---- AKCIÓ POPUP (egyszer, session-enként) ---- */
+  const promoModal = document.querySelector("#promo-modal");
+  if (promoModal) {
+    const openPromo = () => {
+      promoModal.classList.add("open");
+      promoModal.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+    };
+    const closePromo = () => {
+      promoModal.classList.remove("open");
+      promoModal.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+    };
+    if (!sessionStorage.getItem("promoModalShown")) {
+      setTimeout(openPromo, 900);
+      sessionStorage.setItem("promoModalShown", "1");
+    }
+    promoModal.querySelectorAll("[data-pm-close]").forEach(el => el.addEventListener("click", closePromo));
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape") closePromo(); });
+  }
+
   /* ---- LIGHTBOX galéria ---- */
   const items = Array.from(document.querySelectorAll(".gallery .g-item"));
   if (items.length) {
